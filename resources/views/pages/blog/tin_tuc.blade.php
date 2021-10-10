@@ -1,0 +1,51 @@
+@extends('layout')
+@section('content')
+
+    <!-- Blog Section Begin -->
+    <section class="blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-5">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__search">
+                            <form action="#">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>All Cateogry Blogs</h4>
+                            <ul>
+                                @foreach($category_blog as $key =>$blog)
+                                <li><a href="{{URL::to('danh-muc-bai-viet/'.$blog->cate_blog_slug)}}">{{$blog->cate_blog_name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-7">
+                    <div class="row">
+                        @foreach($post as $key => $p )
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="{{asset('public/upload/post/'.$p->post_image)}}" width="360" height="258" alt="{{$p->post_slug}}">
+                                </div>
+                                <div class="blog__item__text">
+                                    <h5><a href="{{URL::to('/bai-viet/'.$p->post_slug)}}">{{$p->post_title}}</a></h5>
+                                    <p>{{$p->post_desc}}</p>
+                                    <a href="{{URL::to('/bai-viet/'.$p->post_slug)}}" class="blog__btn">View <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        <div class="col-lg-12">
+                            <span>{!!$post->links()!!}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+@endsection
